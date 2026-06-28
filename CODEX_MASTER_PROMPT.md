@@ -25,14 +25,14 @@ Phase 1 — Odyssey/literature ingestion:
 1. Implement `scripts/extract_odyssey.py` to extract PDFs from `research/raw/odyssey.zip`, skipping `__MACOSX` and `.DS_Store`.
 2. Produce `research/extracted/papers.jsonl`, extracted text files, and `research/extracted/manifest.json`.
 3. Implement `scripts/build_lit_matrix.py` to generate `docs/literature_matrix.md` with categories, core ideas, reusable components, gaps, and relevance to EvoSemSQL.
-4. If no LLM key is available, use deterministic keyword/section-based summaries and mark them preliminary.
+4. LLM API key (OpenAI) provided in .env file. If no LLM key is available, use deterministic keyword/section-based summaries and mark them preliminary.
 
 Phase 2 — core system:
 1. Implement SQLite schema introspection and profiling.
 2. Implement typed memory records, SQLite-backed memory store, and NetworkX semantic graph.
 3. Implement lexical/fuzzy retrieval and graph expansion.
 4. Implement SQL read-only guardrails with `sqlglot`.
-5. Implement fake LLM provider and optional OpenAI provider.
+5. Implement OpenAI provider (preferred, api key in .env) or fake LLM provider.
 6. Implement query router with routes: `DIRECT_MEMORY`, `TEMPLATE_EXECUTION`, `COMPACT_GENERATION`, `FULL_SCHEMA_FALLBACK`.
 7. Implement SQL template induction/reuse and memory consolidation.
 8. Implement failure memory.
@@ -63,7 +63,7 @@ Hard constraints:
 
 - Never use gold SQL or gold answers to update memory in strict online mode.
 - Never execute destructive SQL.
-- Unit tests must not require internet or paid API calls.
+- Unit tests can require internet or paid API calls, use the provided OPENAI_API_KEY without holding back.
 - Make all missing dataset/API situations explicit and recoverable.
 - Record exact commands run in `docs/progress_log.md`.
 - Do not claim benchmark performance unless the commands were actually run.

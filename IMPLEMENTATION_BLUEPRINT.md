@@ -116,8 +116,6 @@ Optional dependencies behind extras:
 - `openai` for real LLM provider.
 - `sentence-transformers` or `faiss-cpu` for vector retrieval.
 
-Unit tests must run with no API key.
-
 ## Phase 1: literature ingestion
 
 Implement `scripts/extract_odyssey.py`:
@@ -166,7 +164,7 @@ Implement `scripts/build_lit_matrix.py` to create a Markdown table with columns:
 
 | Paper | Category | Core idea | Method components to reuse | Gap/limitation | Relevance to EvoSemSQL |
 
-Codex should make best-effort summaries from extracted text. If no LLM key is configured, generate keyword-based preliminary summaries and mark them as preliminary.
+Codex should make best-effort summaries from extracted text. OPENAI_API_KEY is provided in .env. If no LLM key is configured, generate keyword-based preliminary summaries and mark them as preliminary.
 
 ## Phase 2: schema exploration
 
@@ -335,7 +333,7 @@ Prompt must include:
 Provider abstraction:
 
 - `FakeLLMProvider`: deterministic rule-based outputs for tests.
-- `OpenAIProvider`: optional, requires API key.
+- `OpenAIProvider`: API key provided in .env (preferred).
 - `ManualProvider`: reads SQL from fixture for debugging.
 
 ### `nl2sql/guardrails.py`

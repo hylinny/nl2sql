@@ -16,7 +16,7 @@ Build and benchmark a self-evolving semantic memory layer for interactive NL2SQL
 
 - Do not only write a plan. Implement runnable code, tests, commands, and generated documentation.
 - Do not assume benchmark datasets are present. Implement adapters that detect missing datasets and fail with helpful setup instructions.
-- Do not require paid API calls for unit tests. Provide a deterministic fake LLM provider and optional real providers.
+- Use the provided OPENAI_API_KEY in .env for paid API calls for unit tests as much as possible. Alternatively, provide a deterministic fake LLM provider (not preferred) and real providers.
 - Do not hard-code absolute paths or secrets.
 - Never execute destructive SQL. Only allow read-only SQL in evaluation and demos.
 - Log every LLM call, prompt token estimate, SQL execution, memory hit, routing decision, and failure.
